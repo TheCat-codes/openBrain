@@ -9,12 +9,15 @@ import { VisitHeader } from './visitHeader.tsx'
 import { SearchUsers } from './searchUsers.tsx'
 import { useSelector } from 'react-redux'
 import type { RootState } from '../Store/store.ts'
+import { useEffect } from 'react'
 
 export function Dashboard () {
   const { user } = useSelector((state:RootState) => state.loginSlice)
 
   const navigate = useNavigate()
-  if(!user) return navigate('/login')
+   useEffect(() => {
+    if(!user) navigate('/login')
+   }, [user, navigate])
 
   return (
     <>
