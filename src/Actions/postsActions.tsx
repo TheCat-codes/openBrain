@@ -1,3 +1,4 @@
+import { COMMENTPOST, CREATE, DELETEPOST, DISLIKEPOST, GETCOMMENTS, GETLIKES, GETPOSTS, GETPOSTSBYID, LIKEPOST } from "../routes"
 import { addComment, setcomments, type Comment } from "../Slices/commentsSlice"
 import { setForeignError, setForeignLoading, setForeignPosts } from "../Slices/foreignSlice"
 import { addLike, removeLike, setLikes } from "../Slices/likesSlice"
@@ -8,7 +9,7 @@ import { toast } from "sonner"
 export const getPosts = () => async (dispatch: AppDispatch) => {
   dispatch(setLoading(true))
   try {
-    const res = await fetch('https://backend-openbrain.onrender.com/api/getPosts', {
+    const res = await fetch(GETPOSTS, {
       method: 'GET',
       credentials: 'include',
       headers: { 'Content-Type': 'application/json' }
@@ -33,7 +34,7 @@ export const getPosts = () => async (dispatch: AppDispatch) => {
 export const getPostsById = ({id}: {id:string}) => async (dispatch: AppDispatch) => {
   dispatch(setForeignLoading(true))
   try {
-    const res = await fetch(`https://backend-openbrain.onrender.com/api/getPostsById/${id}`, {
+    const res = await fetch(GETPOSTSBYID + id, {
       method: 'GET',
       credentials:'include'
     })
@@ -61,7 +62,7 @@ export const createPost = (postData: { text: string, img: File | null, id:string
 
   try {
     dispatch(setLoading(true))
-    const res = await fetch('https://backend-openbrain.onrender.com/api/createPost', {
+    const res = await fetch(CREATE, {
       method: 'POST',
       credentials: 'include',
       body: formdata
@@ -85,7 +86,7 @@ export const createPost = (postData: { text: string, img: File | null, id:string
 
 export const like = (postId: string, userId: string) => async (dispatch:AppDispatch) => {
   try {
-    const res = await fetch(`https://backend-openbrain.onrender.com/api/likePost`, {
+    const res = await fetch(LIKEPOST, {
       method: 'POST',
       credentials: 'include',
       headers: { 'Content-Type': 'application/json' },
@@ -108,7 +109,7 @@ export const like = (postId: string, userId: string) => async (dispatch:AppDispa
 
 export const dislike = (postId: string, userId: string) => async (dispatch:AppDispatch) => {
   try {
-    const res = await fetch(`https://backend-openbrain.onrender.com/api/dislikePost`, {
+    const res = await fetch(DISLIKEPOST, {
       method: 'POST',
       credentials: 'include',
       headers: { 'Content-Type': 'application/json' },
@@ -130,7 +131,7 @@ export const dislike = (postId: string, userId: string) => async (dispatch:AppDi
 
 export const getLikes = () => async (dispatch: AppDispatch) => {
   try {
-    const res = await fetch('https://backend-openbrain.onrender.com/api/getLikes', {
+    const res = await fetch(GETLIKES, {
       method: 'GET',
       credentials: 'include',
       headers: { 'Content-Type': 'application/json' }
@@ -154,7 +155,7 @@ export const getLikes = () => async (dispatch: AppDispatch) => {
 
 export const deletePostDatabase = (postToRemove:string) => async (dispatch:AppDispatch) => {
   try {
-    const res = await fetch(`https://backend-openbrain.onrender.com/api/deletePost/${postToRemove}`, {
+    const res = await fetch(DELETEPOST + postToRemove, {
       method: 'DELETE',
       credentials:'include'
     })
@@ -176,7 +177,7 @@ export const deletePostDatabase = (postToRemove:string) => async (dispatch:AppDi
 export const comment = ({postId, userId, commentText}:{postId:string, userId:string, commentText:string}) => async (dispatch:AppDispatch) => {
   try {
     toast.success('Publishing comment')
-    const res = await fetch(`https://backend-openbrain.onrender.com/api/commentPost`, {
+    const res = await fetch(COMMENTPOST, {
       method: 'POST',
       credentials: 'include',
       headers: { 'Content-Type': 'application/json' },
@@ -206,7 +207,7 @@ export const comment = ({postId, userId, commentText}:{postId:string, userId:str
 
 export const getComments  = () => async (dispatch:AppDispatch) => {
   try {
-    const res = await fetch('https://backend-openbrain.onrender.com/api/getComments', {
+    const res = await fetch(GETCOMMENTS, {
       method: 'GET',
       credentials: 'include',
       headers: { 'Content-Type': 'application/json' }

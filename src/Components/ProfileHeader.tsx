@@ -2,7 +2,7 @@ import { MenuIcon } from "./icons"
 import { useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import type { AppDispatch, RootState } from "../Store/store"
-import { LOGOUT } from "../routes"
+import { EDITIMAGE, LOGOUT } from "../routes"
 import { logout, setLoading } from "../Slices/authSlices.ts"
 import { Link } from "./Link.tsx"
 import React, { useState } from "react"
@@ -27,8 +27,10 @@ export function ProfileHeader () {
       })
         .then(async res => {
           const data = await res.json()
+          console.log(data)
           if(res.ok) {
             dispatch(logout())
+            console.log('dispatched')
             return navigate('/')
           }
           console.log(data)
@@ -83,7 +85,7 @@ export function ProfileHeader () {
     }
 
     try {
-      const res = await fetch('https://backend-openbrain.onrender.com/api/editImage', {
+      const res = await fetch(EDITIMAGE, {
       method: 'POST',
       credentials:  'include',
       body: formdata

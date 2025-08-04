@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom"
+import { Navigate, useNavigate } from "react-router-dom";
 import type { RootState, AppDispatch } from "../Store/store.ts";
-import { setUser } from '../Slices/authSlices.ts'
+import { setUser, logout } from '../Slices/authSlices.ts';
 import { useDispatch, useSelector } from "react-redux";
 import { GET_USER, login_url, VERIFY_TOKEN, welcome_url } from "../routes.ts";
 
@@ -10,7 +10,7 @@ interface ProtectedProps {
 }
 
 export function Protected({ children }: ProtectedProps) {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
   const { user } = useSelector((state: RootState) => state.loginSlice);
   const [isLoading, setIsLoading] = useState(true);
@@ -22,9 +22,12 @@ export function Protected({ children }: ProtectedProps) {
           credentials: "include"
         });
 
+        const data = await res.json()
+        console.log(data)
+
         if (!res.ok) {
           setIsLoading(false);
-          return navigate('/');
+          return navigate(welcome_url);
         }
 
         if (!user) {
@@ -32,26 +35,31 @@ export function Protected({ children }: ProtectedProps) {
             method: 'GET',
             credentials: 'include'
           });
-          const userData = await resUser.json();
+
           if (!resUser.ok) {
-            return navigate(login_url)
+            dispatch(logout());
+            return navigate(login_url);
           }
+
+          const userData = await resUser.json();
           dispatch(setUser(userData));
         }
 
         setIsLoading(false);
       } catch (err) {
-        console.log("Error de red o servidor:", err);
+        console.error("Error de red o servidor:", err);
+        dispatch(logout());
         setIsLoading(false);
+        return navigate(login_url);
       }
     };
 
     checkAuth();
-  }, [dispatch, user]);
+  }, [dispatch, user, navigate]);
 
   if (isLoading) return <p>Loading...</p>;
 
-  if (!user) return <Navigate to={welcome_url} replace />;
+  if (!user) return <Navigate to={login_url} replace />;
 
   return <>{children}</>;
 }

@@ -16,6 +16,8 @@ export function WelcomePage() {
         credentials: "include"
       });
 
+      const data = await res.json()
+      console.log(data)
       if (!res.ok) return navigate(login_url)
 
       if (!user) {
@@ -24,14 +26,14 @@ export function WelcomePage() {
           credentials: "include"
         });
         const userData = await resUser.json();
-        if (!resUser.ok) return navigate('/')
+        if (!resUser.ok) return navigate('/login')
         dispatch(setUser(userData));
       }
 
       navigate(dashboard_url)
     } catch (err) {
       console.error("Error:", err);
-      navigate("/");
+      navigate("/login");
     }
   };
 
@@ -44,7 +46,7 @@ export function WelcomePage() {
       <div className="log-options">
         <p>Log-in or Register</p>
         <div className="options">
-          <button className="login-button" onClick={checkAuth}><Link target={undefined} to="/login" destiny="Login" /></button>
+          <button className="login-button" onClick={async () => await checkAuth()}>Login</button>
           <button className="register-button"><Link target={undefined} to="/register" destiny="Register" /></button>
         </div>
       </div>

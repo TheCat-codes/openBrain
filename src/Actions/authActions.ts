@@ -1,11 +1,12 @@
 import { toast } from 'sonner'
 import { setError, setLoading, setUser} from '../Slices/authSlices.ts'
 import type { AppDispatch } from '../Store/store.ts'
+import { DELETE, EDIT, GETPROFILE, LOGIN_API } from '../routes.ts'
 
 export const login = (username: string, password: string ) => async(dispatch: AppDispatch) => {
   dispatch(setLoading())
   try {
-    const res = await fetch('https://backend-openbrain.onrender.com/api/login', {
+    const res = await fetch(LOGIN_API, {
       method: 'POST',
       credentials: 'include',
       headers: {'Content-Type':'application/json'},
@@ -23,6 +24,7 @@ export const login = (username: string, password: string ) => async(dispatch: Ap
 
     dispatch(setUser(data.user))
   } catch (e) {
+    console.log(e)
     if (e instanceof Error) {
       dispatch(setError(e.message))
     } else {
@@ -33,7 +35,7 @@ export const login = (username: string, password: string ) => async(dispatch: Ap
 
 export const getUserById = async ({creator}:{creator:string}) => {
   try {
-    const res = await fetch(`https://backend-openbrain.onrender.com/api/getProfile/${creator}`, {
+    const res = await fetch(GETPROFILE +creator, {
       method: 'GET',
       credentials: 'include',
       headers: {'Content-Type':'application/json'}
@@ -53,7 +55,7 @@ export const getUserById = async ({creator}:{creator:string}) => {
 
 export const editUserAction = async (user:{id:string, username:string, lastname: string, name:string, age:number, email:string}) => {
   try {
-    const res = await fetch('https://backend-openbrain.onrender.com/api/editProfile',{
+    const res = await fetch(EDIT,{
       method:'POST',
       credentials: 'include',
       headers:{'Content-Type':'application/json'},
@@ -76,7 +78,7 @@ export const deleteAccount = (id:string) => async (dispatch:AppDispatch) => {
   
   toast.success('Deleting account')
   try {
-    const res = await fetch('https://backend-openbrain.onrender.com/api/deleteAccount/'+id, {
+    const res = await fetch(DELETE+id, {
       method:'DELETE',
       credentials:'include'
     })

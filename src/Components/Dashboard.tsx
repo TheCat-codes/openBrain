@@ -1,24 +1,14 @@
 import { Header } from './Header.tsx'
 import { ProfileHeader } from './ProfileHeader.tsx'
-import { Route, Routes, useNavigate } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 import { NotFound } from './NotFound.tsx'
 import { Profile } from './Profile.tsx'
 import { Posts } from './Posts.tsx'
 import { VisitProfile } from './VisitProfile.tsx'
 import { VisitHeader } from './visitHeader.tsx'
 import { SearchUsers } from './searchUsers.tsx'
-import { useSelector } from 'react-redux'
-import type { RootState } from '../Store/store.ts'
-import { useEffect } from 'react'
 
 export function Dashboard () {
-  const { user } = useSelector((state:RootState) => state.loginSlice)
-
-  const navigate = useNavigate()
-   useEffect(() => {
-    if(!user) navigate('/login')
-   }, [user, navigate])
-
   return (
     <>
       <div className="dashboard">

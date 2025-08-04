@@ -17,12 +17,10 @@ export function Header () {
         credentials: 'include'
       })
         .then(async res => {
-          const data = await res.json()
           if(res.ok) {
             dispatch(logout())
             return navigate('/')
           }
-          console.log(data)
         })
         .catch(e => console.log(e.message))
     } catch (e) {
