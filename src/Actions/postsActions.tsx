@@ -8,7 +8,7 @@ import { toast } from "sonner"
 export const getPosts = () => async (dispatch: AppDispatch) => {
   dispatch(setLoading(true))
   try {
-    const res = await fetch('http://localhost:4000/api/getPosts', {
+    const res = await fetch('https://backend-openbrain.onrender.com/api/getPosts', {
       method: 'GET',
       credentials: 'include',
       headers: { 'Content-Type': 'application/json' }
@@ -33,7 +33,7 @@ export const getPosts = () => async (dispatch: AppDispatch) => {
 export const getPostsById = ({id}: {id:string}) => async (dispatch: AppDispatch) => {
   dispatch(setForeignLoading(true))
   try {
-    const res = await fetch(`http://localhost:4000/api/getPostsById/${id}`, {
+    const res = await fetch(`https://backend-openbrain.onrender.com/api/getPostsById/${id}`, {
       method: 'GET',
       credentials:'include'
     })
@@ -61,7 +61,7 @@ export const createPost = (postData: { text: string, img: File | null, id:string
 
   try {
     dispatch(setLoading(true))
-    const res = await fetch('http://localhost:4000/api/createPost', {
+    const res = await fetch('https://backend-openbrain.onrender.com/api/createPost', {
       method: 'POST',
       credentials: 'include',
       body: formdata
@@ -85,7 +85,7 @@ export const createPost = (postData: { text: string, img: File | null, id:string
 
 export const like = (postId: string, userId: string) => async (dispatch:AppDispatch) => {
   try {
-    const res = await fetch(`http://localhost:4000/api/likePost`, {
+    const res = await fetch(`https://backend-openbrain.onrender.com/api/likePost`, {
       method: 'POST',
       credentials: 'include',
       headers: { 'Content-Type': 'application/json' },
@@ -108,7 +108,7 @@ export const like = (postId: string, userId: string) => async (dispatch:AppDispa
 
 export const dislike = (postId: string, userId: string) => async (dispatch:AppDispatch) => {
   try {
-    const res = await fetch(`http://localhost:4000/api/dislikePost`, {
+    const res = await fetch(`https://backend-openbrain.onrender.com/api/dislikePost`, {
       method: 'POST',
       credentials: 'include',
       headers: { 'Content-Type': 'application/json' },
@@ -130,7 +130,7 @@ export const dislike = (postId: string, userId: string) => async (dispatch:AppDi
 
 export const getLikes = () => async (dispatch: AppDispatch) => {
   try {
-    const res = await fetch('http://localhost:4000/api/getLikes', {
+    const res = await fetch('https://backend-openbrain.onrender.com/api/getLikes', {
       method: 'GET',
       credentials: 'include',
       headers: { 'Content-Type': 'application/json' }
@@ -154,7 +154,7 @@ export const getLikes = () => async (dispatch: AppDispatch) => {
 
 export const deletePostDatabase = (postToRemove:string) => async (dispatch:AppDispatch) => {
   try {
-    const res = await fetch(`http://localhost:4000/api/deletePost/${postToRemove}`, {
+    const res = await fetch(`https://backend-openbrain.onrender.com/api/deletePost/${postToRemove}`, {
       method: 'DELETE',
       credentials:'include'
     })
@@ -176,7 +176,7 @@ export const deletePostDatabase = (postToRemove:string) => async (dispatch:AppDi
 export const comment = ({postId, userId, commentText}:{postId:string, userId:string, commentText:string}) => async (dispatch:AppDispatch) => {
   try {
     toast.success('Publishing comment')
-    const res = await fetch(`http://localhost:4000/api/commentPost`, {
+    const res = await fetch(`https://backend-openbrain.onrender.com/api/commentPost`, {
       method: 'POST',
       credentials: 'include',
       headers: { 'Content-Type': 'application/json' },
@@ -206,7 +206,7 @@ export const comment = ({postId, userId, commentText}:{postId:string, userId:str
 
 export const getComments  = () => async (dispatch:AppDispatch) => {
   try {
-    const res = await fetch('http://localhost:4000/api/getComments', {
+    const res = await fetch('https://backend-openbrain.onrender.com/api/getComments', {
       method: 'GET',
       credentials: 'include',
       headers: { 'Content-Type': 'application/json' }
