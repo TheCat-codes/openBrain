@@ -83,7 +83,7 @@ export function ProfileHeader () {
     }
 
     try {
-      const res = await fetch('http://localhost:4000/api/editImage', {
+      const res = await fetch('https://backend-openbrain.onrender.com/api/editImage', {
       method: 'POST',
       credentials:  'include',
       body: formdata
