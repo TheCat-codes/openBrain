@@ -5,7 +5,7 @@ import type { AppDispatch } from '../Store/store.ts'
 export const login = (username: string, password: string ) => async(dispatch: AppDispatch) => {
   dispatch(setLoading())
   try {
-    const res = await fetch('http://localhost:4000/api/login', {
+    const res = await fetch('https://backend-openbrain.onrender.com/api/login', {
       method: 'POST',
       credentials: 'include',
       headers: {'Content-Type':'application/json'},
@@ -33,7 +33,7 @@ export const login = (username: string, password: string ) => async(dispatch: Ap
 
 export const getUserById = async ({creator}:{creator:string}) => {
   try {
-    const res = await fetch(`http://localhost:4000/api/getProfile/${creator}`, {
+    const res = await fetch(`https://backend-openbrain.onrender.com/api/getProfile/${creator}`, {
       method: 'GET',
       credentials: 'include',
       headers: {'Content-Type':'application/json'}
@@ -53,7 +53,7 @@ export const getUserById = async ({creator}:{creator:string}) => {
 
 export const editUserAction = async (user:{id:string, username:string, lastname: string, name:string, age:number, email:string}) => {
   try {
-    const res = await fetch('http://localhost:4000/api/editProfile',{
+    const res = await fetch('https://backend-openbrain.onrender.com/api/editProfile',{
       method:'POST',
       credentials: 'include',
       headers:{'Content-Type':'application/json'},
@@ -76,7 +76,7 @@ export const deleteAccount = (id:string) => async (dispatch:AppDispatch) => {
   
   toast.success('Deleting account')
   try {
-    const res = await fetch('http://localhost:4000/api/deleteAccount/'+id, {
+    const res = await fetch('https://backend-openbrain.onrender.com/api/deleteAccount/'+id, {
       method:'DELETE',
       credentials:'include'
     })
