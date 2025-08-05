@@ -4,6 +4,7 @@ import { login } from "../Actions/authActions"
 import type { AppDispatch, RootState } from "../Store/store"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { Link } from "./Link"
 
 export function LoginForm () {
   const [username, setUsername] = useState<string>('')
@@ -35,7 +36,7 @@ export function LoginForm () {
             {error !== null ? error : ''}
             { loading && <span>loading...</span>}
           </p>
-          <a href="/register">Register here</a>
+          <Link to="/register" destiny="Register here" target={undefined} />
         </form>
       </>
     )

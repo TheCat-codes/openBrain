@@ -1,6 +1,7 @@
 import type React from "react"
 import { useState } from "react"
 import { REGISTER_API } from "../routes"
+import { Link } from "./Link"
 
 export function RegisterForm () {
   const [msg, setMsg] = useState('')
@@ -65,7 +66,7 @@ export function RegisterForm () {
       <input type="number" step="any" name="age" placeholder="Enter your age"/>
       <input type="file" name="image"/>
       <button type="submit">Register</button>
-      <a href="/login">Log-in</a>
+      <Link to="/login" destiny="Log-in" target={undefined} />
       <p className="error">{msg}</p>
       <p className="message">{positive}</p>
       {loading && <p className="message">loading...</p>}
