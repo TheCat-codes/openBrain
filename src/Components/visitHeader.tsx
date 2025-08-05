@@ -33,7 +33,7 @@ export function VisitHeader () {
       <header className="header">
         <nav className="nav-bar">
           <div className="app-logoname">
-            <img className="nav-logo" src="../../brainImg.png" alt="" />
+            <img className="nav-logo" src="https://www.pngmart.com/files/21/Brain-Transparent-Isolated-Background.png" alt="" />
             <h2>openBrain</h2>
           </div>
           <label htmlFor="check" className="open-options"><MenuIcon /></label>
