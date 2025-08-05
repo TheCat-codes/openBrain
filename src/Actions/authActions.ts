@@ -45,7 +45,7 @@ export const getUserById = async ({creator}:{creator:string}) => {
     const data = await res.json()
 
     if(!res.ok) {
-      console.log(data)
+      return
     }
     
     localStorage.setItem('visitedUser', JSON.stringify(data.user))

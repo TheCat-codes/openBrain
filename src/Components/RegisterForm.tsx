@@ -40,7 +40,6 @@ export function RegisterForm () {
       const data = await res.json()
 
       if(!res.ok) {
-        console.log(data)
         setLoading(false)
         return setMsg(data.message)
       }

@@ -11,14 +11,11 @@ export function WelcomePage() {
   const { user } = useSelector((state: RootState) => state.loginSlice);
 
   const checkAuth = async () => {
-    console.log('checkeando...')
     try {
       const res = await fetch(VERIFY_TOKEN, {
         credentials: "include"
       });
 
-      const data = await res.json()
-      console.log(data)
       if (!res.ok) return navigate(login_url)
 
       if (!user) {
@@ -40,7 +37,7 @@ export function WelcomePage() {
 
   return (
     <div className="welcome-card">
-      <img src="../../brainImg.png" alt="brain image"/>
+      <img src="https://www.pngmart.com/files/21/Brain-Transparent-Isolated-Background.png" alt="brain image"/>
       <h1>Welcome to openBrain</h1>
       <p>openBrain is an App where you can be honest with yourself and all the people in the site, a place where you can share your experiences and receive people advices without feel pressed or uncomfortable, but you may open your brain to get new thoughts shared by another ones</p>
       <h2 style={{ fontStyle: 'italic'}}>"Open your BRAIN and throw the PAIN"</h2>
