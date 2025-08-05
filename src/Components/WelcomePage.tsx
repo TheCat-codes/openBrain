@@ -11,6 +11,7 @@ export function WelcomePage() {
   const { user } = useSelector((state: RootState) => state.loginSlice);
 
   const checkAuth = async () => {
+    console.log('checkeando...')
     try {
       const res = await fetch(VERIFY_TOKEN, {
         credentials: "include"

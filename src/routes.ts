@@ -1,6 +1,7 @@
 export const login_url = '/login'
 export const dashboard_url = '/dashboard'
 export const welcome_url = '/'
+// http://localhost:4000
 export const REGISTER_API = 'https://backend-openbrain.onrender.com/api/register'
 export const LOGIN_API = 'https://backend-openbrain.onrender.com/api/login'
 export const VERIFY_TOKEN = 'https://backend-openbrain.onrender.com/api/verifyToken'

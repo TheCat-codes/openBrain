@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import type { AppDispatch, RootState } from "../Store/store"
 import { LOGOUT } from "../routes"
-import { logout } from "../Slices/authSlices.ts"
+import { logout, setUser } from "../Slices/authSlices.ts"
 import { Link } from "./Link.tsx"
 
 export function Header () {
@@ -19,6 +19,7 @@ export function Header () {
         .then(async res => {
           if(res.ok) {
             dispatch(logout())
+            dispatch(setUser(null))
             return navigate('/')
           }
         })

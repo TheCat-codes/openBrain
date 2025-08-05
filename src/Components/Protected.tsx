@@ -3,7 +3,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 import type { RootState, AppDispatch } from "../Store/store.ts";
 import { setUser, logout } from '../Slices/authSlices.ts';
 import { useDispatch, useSelector } from "react-redux";
-import { GET_USER, login_url, VERIFY_TOKEN, welcome_url } from "../routes.ts";
+import { GET_USER, login_url, VERIFY_TOKEN } from "../routes.ts";
 
 interface ProtectedProps {
   children: React.ReactNode;
@@ -22,12 +22,9 @@ export function Protected({ children }: ProtectedProps) {
           credentials: "include"
         });
 
-        const data = await res.json()
-        console.log(data)
-
         if (!res.ok) {
           setIsLoading(false);
-          return navigate(welcome_url);
+          return navigate(login_url);
         }
 
         if (!user) {

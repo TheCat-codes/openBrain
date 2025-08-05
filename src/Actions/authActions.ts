@@ -17,6 +17,7 @@ export const login = (username: string, password: string ) => async(dispatch: Ap
     })
 
     const data = await res.json()
+    console.log(data)
 
     if(!res.ok) {
       return dispatch(setError(data.message))

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import type { AppDispatch, RootState } from "../Store/store"
 import { EDITIMAGE, LOGOUT } from "../routes"
-import { logout, setLoading } from "../Slices/authSlices.ts"
+import { logout, setLoading, setUser } from "../Slices/authSlices.ts"
 import { Link } from "./Link.tsx"
 import React, { useState } from "react"
 import { createPost, getPosts } from "../Actions/postsActions.tsx"
@@ -26,14 +26,11 @@ export function ProfileHeader () {
         credentials: 'include'
       })
         .then(async res => {
-          const data = await res.json()
-          console.log(data)
-          if(res.ok) {
-            dispatch(logout())
-            console.log('dispatched')
-            return navigate('/')
-          }
-          console.log(data)
+
+          if(!res.ok) return
+          dispatch(logout())
+          dispatch(setUser(null))
+          return navigate('/')
         })
         .catch(e => console.log(e.message))
     } catch (e) {
